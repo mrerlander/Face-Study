@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let ratingsArr = [];
 
   if (checkBox) {
-    if(window.location.href == "https://face-study-hi.vercel.app/"){
+    if(window.location.href.indexOf("face-study-hi") != -1){
       document.getElementById("hawaii").style.display = "block";
     } else {
       document.getElementById("not-hawaii").style.display = "block";
