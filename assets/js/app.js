@@ -167,7 +167,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const loadFaces = function () {
     do {
-      randFace1 = Math.floor(Math.random() * 32);
+      randFace1 = Math.floor(Math.random() * 64);
     } while (
       randFace1 === temp ||
       randFace1 === temp2 ||
@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
     do {
-      randFace2 = Math.floor(Math.random() * 32);
+      randFace2 = Math.floor(Math.random() * 64);
     } while (
       randFace1 === randFace2 ||
       randFace2 === temp ||
