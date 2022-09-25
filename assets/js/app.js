@@ -11,8 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const buttons = document.getElementsByClassName("rating-btn");
   const urlParams = new URLSearchParams(window.location.search);
   const subjectPool = urlParams.get("subjectPool") || false;
-  const test = "BWLB-Wprot";
-  const surveyURL =
+  let test = "BWLB-Wprot";
+  let surveyURL =
     "https://csunsbs.qualtrics.com/jfe/form/SV_9ThbcqJQBdtGSkS?";
 
   let count = 0;
@@ -23,6 +23,17 @@ document.addEventListener("DOMContentLoaded", function () {
   let temp3;
   let temp4;
   let ratingsArr = [];
+
+  if (document.URL.includes("face-study-am") && !localStorage.getItem("csun")) {
+    if (!localStorage.getItem("consent")) {
+      if (!localStorage.getItem("subjectPool")) {
+        window.location.href = "index.html";
+        localStorage.setItem("csun", "true")
+        surveyURL = "https://csunsbs.qualtrics.com/jfe/form/SV_3x6RlSMHJp3rtQy"
+        test = "s1.3.mm"
+      } 
+    }
+  }
 
   if (checkBox) {
     checkBox.onchange = function () {
@@ -57,38 +68,71 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   let faces = [
-    "./assets/images/BH-CFD-BF-033-028-N.jpg",
-    "./assets/images/BH-CFD-BF-227-137-N.jpg",
-    "./assets/images/BH-CFD-BF-229-179-N.jpg",
-    "./assets/images/BH-CFD-BF-253-202-N.jpg",
-    "./assets/images/BL-CFD-BF-025-002-N-low.jpg",
-    "./assets/images/BL-CFD-BF-217-189-N-low.jpg",
-    "./assets/images/BL-CFD-BF-223-250-N-low.jpg",
-    "./assets/images/BL-CFD-BF-241-222-N-low.jpg",
-    "./assets/images/CFD-MF-301-024-N.jpg",
-    "./assets/images/CFD-MF-304-018-N.jpg",
-    "./assets/images/CFD-MF-305-014-N.jpg",
-    "./assets/images/CFD-MF-332-014-N.jpg",
-    "./assets/images/CFD-MF-333-012-N.jpg",
-    "./assets/images/CFD-MF-334-002-N.jpg",
-    "./assets/images/CFD-MF-335-002-N.jpg",
-    "./assets/images/CFD-MF-348-018-N.jpg",
-    "./assets/images/LH-CFD-LF-209-072-N.jpg",
-    "./assets/images/LH-CFD-LF-214-090-N.jpg",
-    "./assets/images/LH-CFD-LF-215-157-N.jpg",
-    "./assets/images/LH-CFD-LF-255-088-N.jpg",
-    "./assets/images/LL-CFD-LF-204-133-N.jpg",
-    "./assets/images/LL-CFD-LF-212-066-N.jpg",
-    "./assets/images/LL-CFD-LF-221-002-N.jpg",
-    "./assets/images/LL-CFD-LF-252-172-N.jpg",
-    "./assets/images/WH-CFD-WF-003-003-N.jpg",
-    "./assets/images/WH-CFD-WF-008-002-N.jpg",
-    "./assets/images/WH-CFD-WF-011-002-N.jpg",
-    "./assets/images/WH-CFD-WF-244-163-N.jpg",
-    "./assets/images/WL-CFD-WF-217-085-N.jpg",
-    "./assets/images/WL-CFD-WF-218-087-N.jpg",
-    "./assets/images/WL-CFD-WF-225-101-N.jpg",
-    "./assets/images/WL-CFD-WF-248-129-N.jpg",
+    "./assets/images/CFD-WM-257-161-N.jpg",
+    "./assets/images/CFD-AM-201-076-N.jpg",
+    "./assets/images/CFD-AM-203-086-N.jpg",
+    "./assets/images/CFD-AM-205-153-N.jpg",
+    "./assets/images/CFD-AM-209-048-N.jpg",
+    "./assets/images/CFD-AM-210-035-N.jpg",
+    "./assets/images/CFD-AM-213-056-N.jpg",
+    "./assets/images/CFD-AM-221-184-N.jpg",
+    "./assets/images/CFD-AM-223-138-N.jpg",
+    "./assets/images/CFD-AM-224-126-N.jpg",
+    "./assets/images/CFD-AM-229-224-N.jpg",
+    "./assets/images/CFD-AM-231-136-N.jpg",
+    "./assets/images/CFD-AM-234-355-N.jpg",
+    "./assets/images/CFD-AM-236-090-N.jpg",
+    "./assets/images/CFD-AM-238-269-N.jpg",
+    "./assets/images/CFD-AM-246-184-N.jpg",
+    "./assets/images/CFD-AM-249-163-N.jpg",
+    "./assets/images/CFD-LM-207-004-N.jpg",
+    "./assets/images/CFD-LM-213-061-N.jpg",
+    "./assets/images/CFD-LM-216-082-N.jpg",
+    "./assets/images/CFD-LM-217-162-N.jpg",
+    "./assets/images/CFD-LM-218-183-N.jpg",
+    "./assets/images/CFD-LM-223-175-N.jpg",
+    "./assets/images/CFD-LM-225-130-N.jpg",
+    "./assets/images/CFD-LM-232-204-N.jpg",
+    "./assets/images/CFD-LM-235-231-N.jpg",
+    "./assets/images/CFD-LM-238-129-N.jpg",
+    "./assets/images/CFD-LM-239-075-N.jpg",
+    "./assets/images/CFD-LM-242-002-N.jpg",
+    "./assets/images/CFD-LM-243-075-N.jpg",
+    "./assets/images/CFD-LM-246-087-N.jpg",
+    "./assets/images/CFD-LM-249-001-N.jpg",
+    "./assets/images/CFD-LM-252-076-N.jpg",
+    "./assets/images/CFD-MM-302-002-N.jpg",
+    "./assets/images/CFD-MM-306-010-N.jpg",
+    "./assets/images/CFD-MM-307-002-N.jpg",
+    "./assets/images/CFD-MM-309-027-N.jpg",
+    "./assets/images/CFD-MM-310-001-N.jpg",
+    "./assets/images/CFD-MM-311-001-N.jpg",
+    "./assets/images/CFD-MM-312-002-N.jpg",
+    "./assets/images/CFD-MM-313-002-N.jpg",
+    "./assets/images/CFD-MM-314-062-N.jpg",
+    "./assets/images/CFD-MM-315-013-N.jpg",
+    "./assets/images/CFD-MM-317-061-N.jpg",
+    "./assets/images/CFD-MM-318-003-N.jpg",
+    "./assets/images/CFD-MM-319-052-N.jpg",
+    "./assets/images/CFD-MM-320-124-N.jpg",
+    "./assets/images/CFD-MM-323-053-N.jpg",
+    "./assets/images/CFD-MM-325-002-N.jpg",
+    "./assets/images/CFD-WM-004-010-N.jpg",
+    "./assets/images/CFD-WM-020-001-N.jpg",
+    "./assets/images/CFD-WM-024-015-N.jpg",
+    "./assets/images/CFD-WM-035-032-N.jpg",
+    "./assets/images/CFD-WM-036-031-N.jpg",
+    "./assets/images/CFD-WM-039-018-N.jpg",
+    "./assets/images/CFD-WM-200-034-N.jpg",
+    "./assets/images/CFD-WM-202-107-N.jpg",
+    "./assets/images/CFD-WM-203-023-N.jpg",
+    "./assets/images/CFD-WM-205-007-N.jpg",
+    "./assets/images/CFD-WM-230-131-N.jpg",
+    "./assets/images/CFD-WM-234-118-N.jpg",
+    "./assets/images/CFD-WM-236-072-N.jpg",
+    "./assets/images/CFD-WM-242-011-N.jpg",
+    "./assets/images/CFD-WM-247-084-N.jpg"
+
   ];
 
   //firebase config
@@ -106,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
   //firebase ref
   const today = new Date();
   const todayString = today.toDateString();
-  const refPrimary = primaryDB.database().ref(todayString);
+  const refPrimary = primaryDB.database().ref(test + '/' + todayString);
   const newUserRef = refPrimary.push();
   const id = newUserRef.key;
 
